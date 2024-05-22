@@ -21,14 +21,16 @@ namespace SalesWPFApp.UserWPF
     /// </summary>
     public partial class WindowUserProfile : Window
     {
+        private WindowLogin _windowLogin;
         private readonly IMemberRepository _memberRepository;
         private readonly IOrderRepository _orderRepository;
         private readonly IOrderDetailRepository _orderDetailRepository;
         private readonly IProductRepository _productRepository;
         private Member? _member;
-        public WindowUserProfile(IMemberRepository memberRepository,IOrderRepository orderRepository, IProductRepository productRepository, IOrderDetailRepository orderDetailRepository, Member member)
+        public WindowUserProfile(WindowLogin windowLogin,IMemberRepository memberRepository,IOrderRepository orderRepository, IProductRepository productRepository, IOrderDetailRepository orderDetailRepository, Member member)
         {
             InitializeComponent();
+            _windowLogin = windowLogin;
             _memberRepository = memberRepository;
             _orderRepository = orderRepository;
             _productRepository = productRepository;
@@ -60,7 +62,8 @@ namespace SalesWPFApp.UserWPF
 
         private void Button_Logout(object sender, RoutedEventArgs e)
         {
-
+            this.Hide();
+            _windowLogin.Show();
         }
     }
 }

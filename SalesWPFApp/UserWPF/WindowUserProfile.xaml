@@ -13,7 +13,7 @@
                 <Border Padding="10 0">
                     <DockPanel VerticalAlignment="Center" HorizontalAlignment="Stretch">
                         <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                            <TextBlock x:Name="tbName" VerticalAlignment="Center" Foreground="OrangeRed" FontSize="20" FontWeight="Medium">Profile</TextBlock>
+                            <TextBlock x:Name="tbName" VerticalAlignment="Center" Foreground="BlueViolet" FontSize="20" FontWeight="Medium">Profile</TextBlock>
                         </StackPanel>
                         <Button Content="Logout" 
                             Background="Transparent" 
@@ -30,7 +30,7 @@
             </Grid>
             <Grid DockPanel.Dock="Left" Width="180">
                 <TreeView Name="Menu" BorderThickness="0">
-                    <TreeViewItem Header="Profile" IsSelected="False" FontSize="20" Foreground="OrangeRed" FontWeight="Light" Margin="0 0 0 10">
+                    <TreeViewItem Header="Profile" IsSelected="False" FontSize="20" Foreground="DarkBlue" FontWeight="Light" Margin="0 0 0 10">
                         <TreeViewItem Header="Profile" FontSize="14" Margin="0 10 0 0" MouseDoubleClick="Goto_Profile"/>
                         <TreeViewItem Header="Order History" FontSize="14" Margin="0 10 0 0" MouseDoubleClick="Goto_OrderHistory"/>
 

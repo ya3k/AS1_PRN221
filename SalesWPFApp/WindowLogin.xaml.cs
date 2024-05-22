@@ -45,7 +45,7 @@ namespace SalesWPFApp
                     //Cart.Email = username;
                     //WindowStore windowStore = new WindowStore(this, _productRepository, _memberRepository , _orderRepository);
                     //windowStore.Show();
-                    WindowUserProfile windowUserProfile = new WindowUserProfile(_memberRepository, _orderRepository,_productRepository, _orderDetailRepository, member);
+                    WindowUserProfile windowUserProfile = new WindowUserProfile(this,_memberRepository, _orderRepository,_productRepository, _orderDetailRepository, member);
                     windowUserProfile.Show();
                     this.Hide();
                 }

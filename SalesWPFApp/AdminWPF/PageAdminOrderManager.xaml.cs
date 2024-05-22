@@ -42,11 +42,35 @@ namespace SalesWPFApp.AdminWPF
 
         private void Button_Search(object sender, RoutedEventArgs e)
         {
-            DateTime? startDate = dpOrderDate.SelectedDate == null ? null : dpOrderDate.SelectedDate.Value.Date;
-            DateTime? endDate = dpShippedDate.SelectedDate == null ? null : dpShippedDate.SelectedDate.Value.Date;
-            listView.ItemsSource = _orderRepository.FindAllByStartTimeAndEndTime(startDate.Value, endDate.Value);
+            try
+            {
+                DateTime? startDate = dpOrderDate.SelectedDate;
+                DateTime? endDate = dpShippedDate.SelectedDate;
+
+                // Check if both start date and end date are selected
+                if (startDate == null || endDate == null)
+                {
+                    MessageBox.Show("Please select both start date and end date.");
+                    return;
+                }
+
+                // Check if start date is before end date
+                if (startDate > endDate)
+                {
+                    MessageBox.Show("Start date cannot be after end date.");
+                    return;
+                }
+
+                // Retrieve orders within the specified date range
+                listView.ItemsSource = _orderRepository.FindAllByStartTimeAndEndTime(startDate.Value, endDate.Value);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("An error occurred: " + ex.Message);
+            }
         }
-            
+
+
         public void RefreshListView()
         {
             listView.ItemsSource = _orderRepository.List();

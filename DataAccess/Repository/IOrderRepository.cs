@@ -17,5 +17,6 @@ namespace DataAccess.Repository
         IEnumerable<Order> FindByUserID(int memId);
         IEnumerable<Order> FindByEmail(string email);
         IEnumerable<Order> FindAllByStartTimeAndEndTime(DateTime start, DateTime end);
+        IEnumerable<Order> FindAllByStartTimeAndEndTimeAndUser(int userId,DateTime start, DateTime end);
     }
 }

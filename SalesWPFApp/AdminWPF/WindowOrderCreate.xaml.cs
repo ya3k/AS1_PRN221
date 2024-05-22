@@ -80,28 +80,74 @@ namespace SalesWPFApp.AdminWPF
         {
             try
             {
+                // Validate member selection
+                if (string.IsNullOrEmpty(comboBoxMember.Text))
+                {
+                    MessageBox.Show("Please select a member.");
+                    return;
+                }
+
+                // Validate order date
+                if (!DateTime.TryParse(datePickerOrderDate.Text, out DateTime orderDate))
+                {
+                    MessageBox.Show("Please enter a valid order date.");
+                    return;
+                }
+
+                // Validate required date
+                if (!DateTime.TryParse(datePickerRequiredDate.Text, out DateTime requiredDate))
+                {
+                    MessageBox.Show("Please enter a valid required date.");
+                    return;
+                }
+
+                // Validate shipped date
+                if (!DateTime.TryParse(datePickerShippedDate.Text, out DateTime shippedDate))
+                {
+                    MessageBox.Show("Please enter a valid shipped date.");
+                    return;
+                }
+
+                // Validate freight
+                if (!decimal.TryParse(txtBoxFreight.Text, out decimal freight) || freight < 0)
+                {
+                    MessageBox.Show("Please enter a valid positive freight value.");
+                    return;
+                }
+
+                // Check if creating a new order or updating an existing one
                 if (order == null)
                 {
+                    // Create a new order
                     var memEmail = comboBoxMember.Text;
-                    var memid = _memberRepository.FindByEmail(memEmail);
-                    Order order = new Order
+                    var mem = _memberRepository.FindByEmail(memEmail);
+                    if (mem == null)
                     {
-                        MemberId = memid.MemberId,
-                        OrderDate = DateTime.Parse(datePickerOrderDate.Text),
-                        RequiredDate = DateTime.Parse(datePickerRequiredDate.Text),
-                        ShippedDate = DateTime.Parse(datePickerShippedDate.Text),
-                        Freight = decimal.Parse(txtBoxFreight.Text)
+                        MessageBox.Show("Invalid member selected.");
+                        return;
+                    }
+
+                    Order newOrder = new Order
+                    {
+                        MemberId = mem.MemberId,
+                        OrderDate = orderDate,
+                        RequiredDate = requiredDate,
+                        ShippedDate = shippedDate,
+                        Freight = freight
                     };
-                    _orderRepository.Add(order);
+                    _orderRepository.Add(newOrder);
                 }
                 else
                 {
-                    order.OrderDate = DateTime.Parse(datePickerOrderDate.Text);
-                    order.RequiredDate = DateTime.Parse(datePickerRequiredDate.Text);
-                    order.ShippedDate = DateTime.Parse(datePickerShippedDate.Text);
-                    order.Freight = decimal.Parse(txtBoxFreight.Text);
+                    // Update existing order
+                    order.OrderDate = orderDate;
+                    order.RequiredDate = requiredDate;
+                    order.ShippedDate = shippedDate;
+                    order.Freight = freight;
                     _orderRepository.Update(order);
                 }
+
+                // Refresh the list view and close the window
                 _pageAdminOrderManager.RefreshListView();
                 this.Close();
             }
@@ -110,5 +156,6 @@ namespace SalesWPFApp.AdminWPF
                 MessageBox.Show(ex.Message);
             }
         }
+
     }
 }

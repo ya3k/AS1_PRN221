@@ -53,7 +53,7 @@ namespace SalesWPFApp.UserWPF
         }
 
 
-        private void RefreshListView()
+        public void RefreshListView()
         {
             listView.ItemsSource = _orderRepository.FindByUserID(_member.MemberId);
 
@@ -96,13 +96,15 @@ namespace SalesWPFApp.UserWPF
         private void Button_Insert(object sender, RoutedEventArgs e)
         {
 
+            WindowNewOrder windowNewOrder = new WindowNewOrder(this, _orderRepository, _memberRepository, null, _member);
+            windowNewOrder.ShowDialog();
         }
 
         private void Button_Search(object sender, RoutedEventArgs e)
         {
             DateTime? startDate = dpOrderDate.SelectedDate == null ? null : dpOrderDate.SelectedDate.Value.Date;
             DateTime? endDate = dpShippedDate.SelectedDate == null ? null : dpShippedDate.SelectedDate.Value.Date;
-            listView.ItemsSource = _orderRepository.FindAllByStartTimeAndEndTime(startDate.Value, endDate.Value);
+            listView.ItemsSource = _orderRepository.FindAllByStartTimeAndEndTimeAndUser(_member.MemberId,startDate.Value, endDate.Value);
         }
 
         private void Button_Clear(object sender, RoutedEventArgs e)
@@ -170,9 +172,21 @@ namespace SalesWPFApp.UserWPF
 
         private void Button_ViewDetail(object sender, RoutedEventArgs e)
         {
-            Order selectedOrder = (Order)listView.SelectedItem;
-            WindowOrderDetailView windowOrderDetailView = new WindowOrderDetailView(_orderDetailRepository, _productRepository, selectedOrder);
-            windowOrderDetailView.Show();
+            int count = listView.SelectedItems.Count;
+            if (count > 0)
+            {
+                Order selectedOrder = (Order)listView.SelectedItem;
+                WindowOrderDetailView windowOrderDetailView = new WindowOrderDetailView(_orderDetailRepository, _productRepository, selectedOrder);
+                windowOrderDetailView.Show();
+              
+            }
+            else
+            {
+                MessageBox.Show("Please select an order to view its details.");
+                return;
+
+            }
+            
         }
     }
 }

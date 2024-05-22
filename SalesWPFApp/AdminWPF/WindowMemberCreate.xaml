@@ -11,7 +11,7 @@
     <Window.Resources>
         <!-- Button -->
         <Style TargetType="{x:Type Button}" x:Key="btnPrimary">
-            <Setter Property="Background" Value="OrangeRed"/>
+            <Setter Property="Background" Value="BlueViolet"/>
             <Setter Property="Padding" Value="20 5"/>
             <Setter Property="Foreground" Value="White"/>
             <Setter Property="FontSize" Value="14"/>
@@ -19,12 +19,12 @@
 
         <!-- Text Block -->
         <Style TargetType="{x:Type TextBlock}" x:Key="headingPrimary">
-            <Setter Property="Foreground" Value="OrangeRed"/>
+            <Setter Property="Foreground" Value="BlueViolet"/>
             <Setter Property="FontSize" Value="30"/>
             <Setter Property="FontWeight" Value="Bold"/>
         </Style>
         <Style TargetType="{x:Type TextBlock}" x:Key="headingSecorndary">
-            <Setter Property="Foreground" Value="OrangeRed"/>
+            <Setter Property="Foreground" Value="BlueViolet"/>
             <Setter Property="FontSize" Value="20"/>
             <Setter Property="FontWeight" Value="Medium"/>
         </Style>
@@ -55,13 +55,8 @@
             <Setter Property="HorizontalAlignment" Value="Stretch"/>
         </Style>
 
-        <!-- Tree View -->
-        <Style TargetType="{x:Type TreeViewItem}" x:Key="treeViewItemMenuPrimary">
-            <Setter Property="FontSize" Value="20"/>
-            <Setter Property="Foreground" Value="OrangeRed"/>
-            <Setter Property="FontWeight" Value="Light"/>
-            <Setter Property="Margin" Value="0 0 0 10"/>
-        </Style>
+      
+      
     </Window.Resources>
     <Grid>
         <StackPanel>

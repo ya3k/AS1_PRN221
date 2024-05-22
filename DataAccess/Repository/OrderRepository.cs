@@ -17,7 +17,12 @@ namespace DataAccess.Repository
 
         public IEnumerable<Order> FindAllByStartTimeAndEndTime(DateTime start, DateTime end)
         {
-            return OrderDAO.Instance.FindAll(order => order.OrderDate >= start && order.OrderDate <= end);
+            return OrderDAO.Instance.FindAll(order => order.OrderDate >= start && order.ShippedDate <= end);
+        }
+
+        public IEnumerable<Order> FindAllByStartTimeAndEndTimeAndUser(int userId, DateTime start, DateTime end)
+        {
+            return OrderDAO.Instance.FindAll(order => order.OrderDate >= start && order.ShippedDate <= end && order.Member.MemberId == userId);
         }
 
         public IEnumerable<Order> FindByEmail(string email)

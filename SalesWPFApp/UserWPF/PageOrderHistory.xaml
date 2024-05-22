@@ -56,7 +56,7 @@
                     <Button Visibility="Visible" x:Name="btnEdit" IsEnabled="True" Width="80" Height="30" Padding="5 4" HorizontalAlignment="Right" Margin="0 0 10 0" Click="Button_Edit">
                         Update
                     </Button>
-                    <Button Width="80" Visibility="Hidden" Height="30" Padding="5 4" HorizontalAlignment="Right" Margin="0 0 0 0" Click="Button_Insert">
+                    <Button Width="80"  Height="30" Padding="5 4" HorizontalAlignment="Right" Margin="0 0 10 0" Click="Button_Insert">
                         Add New
                     </Button>
                     <Button x:Name="btnDetail" Width="100" Height="30" Padding="5 4" HorizontalAlignment="Right" Margin="0 0 0 0" Click="Button_ViewDetail">
