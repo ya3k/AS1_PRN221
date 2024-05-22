@@ -28,7 +28,6 @@ namespace SalesWPFApp.AdminWPF
         {
             _productRepository = productRepository;
             InitializeComponent();
-
             listView.SelectionChanged += ListView_SelectionChanged;
 
 

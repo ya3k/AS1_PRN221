@@ -148,7 +148,7 @@ namespace SalesWPFApp.AdminWPF
                 dpOrderDate.SelectedDate = selectedOrder.OrderDate;
                 dpRequiredDate.SelectedDate = selectedOrder.RequiredDate;
                 dpShippedDate.SelectedDate = selectedOrder.ShippedDate;
-                tbFreight.Text = selectedOrder.Freight?.ToString() ?? string.Empty;
+                tbFreight.Text = selectedOrder.Freight?.ToString("F2") ?? string.Empty;
 
                 btnEdit.IsEnabled = true;
                 btnDelete.IsEnabled = true;

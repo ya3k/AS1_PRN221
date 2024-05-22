@@ -31,15 +31,20 @@ namespace SalesWPFApp
             services.AddScoped<IMemberRepository, MemberRepository>();
             services.AddScoped<IProductRepository, ProductRepository>();
             services.AddScoped<IOrderRepository, OrderRepository>();
+            services.AddScoped<IOrderDetailRepository, OrderDetailRepository>();
 
-            services.AddSingleton<WindowUserProfile>();
             services.AddSingleton<WindowAdminManager>();
             services.AddSingleton<WindowLogin>();
+
+            services.AddSingleton<WindowUserProfile>();
             services.AddSingleton<PageOrderHistory>();
             services.AddSingleton<PageMemberProfile>();
+
             services.AddSingleton<PageAdminMemberManager>();
             services.AddSingleton<PageAdminProductManager>();
             services.AddSingleton<PageAdminOrderManager>();
+
+            services.AddSingleton<WindowOrderDetailView>();
             services.AddSingleton<WindowMemberCreate>();
             services.AddSingleton<WindowProductCreate>();
             services.AddSingleton<WindowOrderCreate>();
