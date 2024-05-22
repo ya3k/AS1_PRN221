@@ -1,0 +1,89 @@
+﻿<Window x:Class="SalesWPFApp.AdminWPF.WindowMemberCreate"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SalesWPFApp.AdminWPF"
+        mc:Ignorable="d"
+        Loaded="Window_Loaded"
+        WindowStartupLocation="CenterOwner"
+        Title="WindowMemberCreate" Height="500" Width="600">
+    <Window.Resources>
+        <!-- Button -->
+        <Style TargetType="{x:Type Button}" x:Key="btnPrimary">
+            <Setter Property="Background" Value="OrangeRed"/>
+            <Setter Property="Padding" Value="20 5"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontSize" Value="14"/>
+        </Style>
+
+        <!-- Text Block -->
+        <Style TargetType="{x:Type TextBlock}" x:Key="headingPrimary">
+            <Setter Property="Foreground" Value="OrangeRed"/>
+            <Setter Property="FontSize" Value="30"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+        </Style>
+        <Style TargetType="{x:Type TextBlock}" x:Key="headingSecorndary">
+            <Setter Property="Foreground" Value="OrangeRed"/>
+            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="FontWeight" Value="Medium"/>
+        </Style>
+        <Style TargetType="{x:Type TextBlock}" x:Key="spanPrimary">
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="FontSize" Value="14"/>
+        </Style>
+
+        <!-- Label -->
+        <Style TargetType="{x:Type Label}" x:Key="labelPrimary">
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="FontSize" Value="14"/>
+        </Style>
+
+        <!-- TextBox -->
+        <Style TargetType="{x:Type TextBox}" x:Key="texboxPrimary">
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Padding" Value="2 4"/>
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+        </Style>
+
+        <!-- PasswordBox -->
+        <Style TargetType="{x:Type PasswordBox}" x:Key="passwordBoxPrimary">
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Padding" Value="2 4"/>
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+        </Style>
+
+        <!-- Tree View -->
+        <Style TargetType="{x:Type TreeViewItem}" x:Key="treeViewItemMenuPrimary">
+            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="Foreground" Value="OrangeRed"/>
+            <Setter Property="FontWeight" Value="Light"/>
+            <Setter Property="Margin" Value="0 0 0 10"/>
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <StackPanel>
+            <TextBlock Margin="0 10 0 20"  FontWeight="Light" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Top" Style="{StaticResource headingPrimary}">
+              Member Control
+            </TextBlock>
+            <StackPanel Background="white" HorizontalAlignment="Center" VerticalAlignment="Center" Width="300">
+                <Label Content="Id" x:Name="labelId" Visibility="Collapsed" IsEnabled="False" Style="{StaticResource labelPrimary}"/>
+                <TextBox x:Name="txtBoxId" Margin="0 0 0 5" Visibility="Collapsed" IsEnabled="False" Style="{StaticResource texboxPrimary}"/>
+                <Label Content="Email" Style="{StaticResource labelPrimary}"/>
+                <TextBox x:Name="txtBoxEmail" Margin="0 0 0 5" Style="{StaticResource texboxPrimary}"/>
+                <Label Content="CompanyName" Style="{StaticResource labelPrimary}"/>
+                <TextBox x:Name="txtBoxCompanyName" Margin="0 0 0 5" Style="{StaticResource texboxPrimary}"/>
+                <Label Content="City" Style="{StaticResource labelPrimary}"/>
+                <TextBox x:Name="txtBoxCity" Margin="0 0 0 5" Style="{StaticResource texboxPrimary}"/>
+                <Label Content="Country" Style="{StaticResource labelPrimary}"/>
+                <TextBox x:Name="txtBoxCountry" Margin="0 0 0 5" Style="{StaticResource texboxPrimary}"/>
+                <Label Content="Password" Style="{StaticResource labelPrimary}"/>
+                <TextBox x:Name="txtBoxPassword" Margin="0 0 0 5" Style="{StaticResource texboxPrimary}"/>
+                <Button x:Name="btn" Content="Create" Style="{StaticResource btnPrimary}" Width="100" Margin="0 10 0 5" Click="Button_Click"/>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+
+</Window>
