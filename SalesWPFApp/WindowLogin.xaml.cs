@@ -14,13 +14,15 @@ namespace SalesWPFApp
         private readonly IMemberRepository _memberRepository;
         private readonly IProductRepository _productRepository;
         private readonly IOrderRepository _orderRepository;
+        private readonly IOrderDetailRepository _orderDetailRepository;
 
-        public WindowLogin(IMemberRepository memberRepository, IProductRepository productRepository, IOrderRepository orderRepository)
+        public WindowLogin(IMemberRepository memberRepository, IProductRepository productRepository, IOrderRepository orderRepository, IOrderDetailRepository orderDetailRepository)
         {
             InitializeComponent();
             _memberRepository = memberRepository;
             _productRepository = productRepository;
             _orderRepository = orderRepository;
+            _orderDetailRepository = orderDetailRepository;
         }
 
         private void LoginButton_Click(object sender, RoutedEventArgs e)
@@ -34,7 +36,7 @@ namespace SalesWPFApp
                 if (memLogin == 0)
                 {
                     Cart.Email = username;
-                    WindowAdminManager windowAdminManager = new WindowAdminManager(this,_memberRepository, _productRepository, _orderRepository);
+                    WindowAdminManager windowAdminManager = new WindowAdminManager(this,_memberRepository, _productRepository, _orderRepository,_orderDetailRepository);
                     windowAdminManager.Show();
                     this.Hide();
                 }
@@ -43,7 +45,7 @@ namespace SalesWPFApp
                     //Cart.Email = username;
                     //WindowStore windowStore = new WindowStore(this, _productRepository, _memberRepository , _orderRepository);
                     //windowStore.Show();
-                    WindowUserProfile windowUserProfile = new WindowUserProfile(_memberRepository, _orderRepository,member);
+                    WindowUserProfile windowUserProfile = new WindowUserProfile(_memberRepository, _orderRepository,_productRepository, _orderDetailRepository, member);
                     windowUserProfile.Show();
                     this.Hide();
                 }

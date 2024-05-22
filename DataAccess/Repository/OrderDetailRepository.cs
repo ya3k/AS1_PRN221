@@ -26,9 +26,9 @@ namespace DataAccess.Repository
             return OrderDetailDAO.Instance.FindAll(orderDetail => orderDetail.OrderId == orderId);
         }
 
-        public IEnumerable<OrderDetail> FindByOrderIdAndProductId(int orderId, int productId)
+        public OrderDetail FindByOrderIdAndProductId(int orderId, int productId)
         {
-           return OrderDetailDAO.Instance.FindAll(orderDetail => orderDetail.OrderId == orderId && orderDetail.ProductId == productId);
+           return OrderDetailDAO.Instance.FindOne(orderDetail => orderDetail.OrderId == orderId && orderDetail.ProductId == productId);
         }
 
         public IEnumerable<OrderDetail> FindByProductId(int productId)
@@ -39,6 +39,11 @@ namespace DataAccess.Repository
         public IEnumerable<OrderDetail> GetAllOrderDetail()
         {
           return OrderDetailDAO.Instance.GetAllOrderDetail();
+        }
+
+        public IEnumerable<OrderDetail> ListDettailOrderIdAndProductId(int orderId, int productId)
+        {
+           return OrderDetailDAO.Instance.FindAll(orderDetail => orderDetail.OrderId == orderId && orderDetail.ProductId == productId);
         }
 
         public void RemoveOrderDetail(OrderDetail orderDetail)

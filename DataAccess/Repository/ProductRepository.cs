@@ -59,5 +59,10 @@ namespace DataAccess.Repository
                 (!unitInStock.HasValue || product.UnitsInStock == unitInStock.Value)
             );
         }
+
+        public Product FindByProductName(string name)
+        {
+            return ProductDAO.Instance.FindOne(product => product.ProductName == name);
+        }
     }
 }

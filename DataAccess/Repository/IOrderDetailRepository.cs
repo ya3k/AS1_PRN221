@@ -16,6 +16,8 @@ namespace DataAccess.Repository
         IEnumerable<OrderDetail> FindByOrderId(int orderId);
         IEnumerable<OrderDetail> FindByProductId(int productId);
         IEnumerable<OrderDetail> FindAllByUser(int userID);
-        IEnumerable<OrderDetail> FindByOrderIdAndProductId(int orderId, int productId);
+        OrderDetail FindByOrderIdAndProductId(int orderId, int productId);
+        IEnumerable<OrderDetail> ListDettailOrderIdAndProductId(int orderId, int productId);
+
     }
 }

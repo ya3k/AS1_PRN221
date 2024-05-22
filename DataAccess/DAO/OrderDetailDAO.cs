@@ -1,4 +1,5 @@
 ﻿using BusinessObject.Entity;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,14 +31,14 @@ namespace DataAccess.DAO
             }
         }   
 
-        public OrderDetail FindOne(int orderId, int productId)
+        public OrderDetail FindOne(Expression<Func<OrderDetail, bool>> pridecate)
         {
             OrderDetail orderDetail = null;
             try
             {
                 using (var salesDB = new As1storeContext())
                 {
-                    orderDetail = salesDB.OrderDetails.SingleOrDefault(od => od.OrderId == orderId && od.ProductId == productId);
+                    orderDetail = salesDB.OrderDetails.Include(m => m.Order).Include(m => m.Product).FirstOrDefault(pridecate);
                 }
             }
             catch (Exception e)
@@ -68,7 +69,7 @@ namespace DataAccess.DAO
         {
             try
             {
-                OrderDetail od = FindOne(orderDetail.OrderId, orderDetail.ProductId);
+                OrderDetail od = FindOne(m => m.OrderId == orderDetail.OrderId && m.ProductId == orderDetail.ProductId);
                 if (od == null)
                 {
                     using (var salesDB = new As1storeContext())
@@ -88,12 +89,12 @@ namespace DataAccess.DAO
         {
             try
             {
-                OrderDetail od = FindOne(orderDetail.OrderId, orderDetail.ProductId);
+                OrderDetail od = FindOne(m => m.OrderId == orderDetail.OrderId && m.ProductId == orderDetail.ProductId);
                 if (od != null)
                 {
                     using (var salesDB = new As1storeContext())
                     {
-                        salesDB.Entry(od).CurrentValues.SetValues(orderDetail);
+                        salesDB.OrderDetails.Update(orderDetail);
                         salesDB.SaveChanges();
                     }
                 }

@@ -24,7 +24,8 @@ namespace SalesWPFApp.AdminWPF
         private readonly IMemberRepository _memberRepository;
         private readonly IProductRepository _productRepository;
         private readonly IOrderRepository _orderRepository;
-        public WindowAdminManager(WindowLogin windowLogin, IMemberRepository memberRepository, IProductRepository productRepository, IOrderRepository orderRepository)
+        private readonly IOrderDetailRepository _orderDetailRepository;
+        public WindowAdminManager(WindowLogin windowLogin, IMemberRepository memberRepository, IProductRepository productRepository, IOrderRepository orderRepository, IOrderDetailRepository orderDetailRepository)
         {
 
             InitializeComponent();
@@ -32,7 +33,7 @@ namespace SalesWPFApp.AdminWPF
             _memberRepository = memberRepository;
             _productRepository = productRepository;
             _orderRepository = orderRepository;
-
+            _orderDetailRepository = orderDetailRepository;
         }
         private void Button_Logout(object sender, RoutedEventArgs e)
         {
@@ -54,7 +55,7 @@ namespace SalesWPFApp.AdminWPF
 
         private void Goto_AdminOrderManager(object sender, RoutedEventArgs e)
         {
-            PageAdminOrderManager pageAdminOrderManager = new PageAdminOrderManager(_orderRepository, _memberRepository);
+            PageAdminOrderManager pageAdminOrderManager = new PageAdminOrderManager(_orderRepository, _memberRepository, _productRepository, _orderDetailRepository);
             frameAdmin.Content = pageAdminOrderManager;
         }
 

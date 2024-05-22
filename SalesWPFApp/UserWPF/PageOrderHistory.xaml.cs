@@ -1,5 +1,7 @@
 ﻿using BusinessObject.Entity;
+using DataAccess.DAO;
 using DataAccess.Repository;
+using SalesWPFApp.AdminWPF;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,15 +26,20 @@ namespace SalesWPFApp.UserWPF
     {
         private readonly IOrderRepository _orderRepository;
         private readonly IMemberRepository _memberRepository;
+        private readonly IOrderDetailRepository _orderDetailRepository;
+        private readonly IProductRepository _productRepository;
         Member? _member;
-        public PageOrderHistory(IOrderRepository orderRepository, IMemberRepository memberRepository, Member? member)
+        public PageOrderHistory(IOrderRepository orderRepository, IMemberRepository memberRepository,IProductRepository productRepository, IOrderDetailRepository orderDetailRepository , Member? member)
         {
             InitializeComponent();
             _orderRepository = orderRepository;
             listView.SelectionChanged += ListView_SelectionChanged;
             _memberRepository = memberRepository;
+            _productRepository = productRepository;
+            _orderDetailRepository = orderDetailRepository;
             _member = member;
             Loaded += Page_Loaded;
+
         }
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
@@ -46,16 +53,44 @@ namespace SalesWPFApp.UserWPF
         }
 
 
-         private void RefreshListView()
+        private void RefreshListView()
         {
             listView.ItemsSource = _orderRepository.FindByUserID(_member.MemberId);
 
         }
-      
+
 
         private void Button_Edit(object sender, RoutedEventArgs e)
         {
+            int count = listView.SelectedItems.Count;
+            if (count > 0)
+            {
+                if (dpOrderDate.SelectedDate == null || dpRequiredDate.SelectedDate == null || dpShippedDate.SelectedDate == null)
+                {
+                    MessageBox.Show("Please select order date, required date, and shipped date.");
+                    return;
+                }
+                Order selectedOrder = (Order)listView.SelectedItem;
+                DateTime orderDate = dpOrderDate.SelectedDate.Value;
+                DateTime requiredDate = dpRequiredDate.SelectedDate.Value;
+                DateTime shippedDate = dpShippedDate.SelectedDate.Value;
+                if (orderDate > requiredDate || requiredDate > shippedDate)
+                {
+                    MessageBox.Show("Order date must be before required date, and required date must be before shipped date.");
+                    return;
+                }
+                selectedOrder.OrderDate = orderDate;
+                selectedOrder.RequiredDate = requiredDate;
+                selectedOrder.ShippedDate = shippedDate;
 
+
+                _orderRepository.Update(selectedOrder);
+                MessageBox.Show("Order updated successfully!");
+                RefreshListView();
+
+                
+            }
+            
         }
 
         private void Button_Insert(object sender, RoutedEventArgs e)
@@ -133,5 +168,11 @@ namespace SalesWPFApp.UserWPF
             }
         }
 
+        private void Button_ViewDetail(object sender, RoutedEventArgs e)
+        {
+            Order selectedOrder = (Order)listView.SelectedItem;
+            WindowOrderDetailView windowOrderDetailView = new WindowOrderDetailView(_orderDetailRepository, _productRepository, selectedOrder);
+            windowOrderDetailView.Show();
+        }
     }
 }

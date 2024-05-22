@@ -23,12 +23,16 @@ namespace SalesWPFApp.UserWPF
     {
         private readonly IMemberRepository _memberRepository;
         private readonly IOrderRepository _orderRepository;
+        private readonly IOrderDetailRepository _orderDetailRepository;
+        private readonly IProductRepository _productRepository;
         private Member? _member;
-        public WindowUserProfile(IMemberRepository memberRepository,IOrderRepository orderRepository ,Member member)
+        public WindowUserProfile(IMemberRepository memberRepository,IOrderRepository orderRepository, IProductRepository productRepository, IOrderDetailRepository orderDetailRepository, Member member)
         {
             InitializeComponent();
             _memberRepository = memberRepository;
             _orderRepository = orderRepository;
+            _productRepository = productRepository;
+            _orderDetailRepository = orderDetailRepository;
             this._member = member;
             tbName.Text = _member.Email;
         }
@@ -50,7 +54,7 @@ namespace SalesWPFApp.UserWPF
 
         private void Goto_OrderHistory(object sender, MouseButtonEventArgs e)
         {
-            PageOrderHistory pageOrderHistory = new PageOrderHistory( _orderRepository, _memberRepository, _member);
+            PageOrderHistory pageOrderHistory = new PageOrderHistory( _orderRepository, _memberRepository,_productRepository,_orderDetailRepository, _member);
             frameAdmin.Content = pageOrderHistory;
         }
 

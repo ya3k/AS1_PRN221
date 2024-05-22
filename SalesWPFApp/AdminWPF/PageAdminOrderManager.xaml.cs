@@ -24,12 +24,16 @@ namespace SalesWPFApp.AdminWPF
     {
         private readonly IOrderRepository _orderRepository;
         private readonly IMemberRepository _memberRepository;
-        public PageAdminOrderManager(IOrderRepository orderRepository, IMemberRepository memberRepository)
+        private readonly IProductRepository _productRepository;
+        private readonly IOrderDetailRepository _orderDetailRepository;
+        public PageAdminOrderManager(IOrderRepository orderRepository, IMemberRepository memberRepository, IProductRepository productRepository, IOrderDetailRepository orderDetailRepository)
         {
             _orderRepository = orderRepository;
             InitializeComponent();
             listView.SelectionChanged += ListView_SelectionChanged;
             _memberRepository = memberRepository;
+            _productRepository = productRepository;
+            _orderDetailRepository = orderDetailRepository;
         }
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
@@ -171,6 +175,29 @@ namespace SalesWPFApp.AdminWPF
             dpRequiredDate.SelectedDate = null;
             dpShippedDate.SelectedDate = null;
             tbFreight.Clear();
+        }
+
+        private void Button_ViewDetail(object sender, RoutedEventArgs e)
+        {
+            int count = listView.SelectedItems.Count;
+            if (count > 0)
+            {
+                //mutiple select
+                List<Order> selectedOrders = listView.SelectedItems.Cast<Order>().ToList();
+
+                foreach (Order order in selectedOrders)
+                {
+                    WindowOrderDetailView windowOrderDetailView = new WindowOrderDetailView(_orderDetailRepository,_productRepository, order);
+                    windowOrderDetailView.ShowDialog();
+                }
+            }
+            else
+            {
+                MessageBox.Show("Please select order to view detail");
+            }
+
+         
+
         }
     }
 }

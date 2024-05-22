@@ -5,8 +5,123 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SalesWPFApp.AdminWPF"
         mc:Ignorable="d"
-        Title="WindowOrderDetailView" Height="450" Width="800">
-    <Grid>
+        Loaded="Window_Loaded"
+        WindowStartupLocation="CenterScreen"
         
+        Title="WindowOrderDetailView" Height="600" Width="1000">
+    <Grid Background="White" >
+        <StackPanel>
+            <TextBlock Name="tbHeader" Margin="0 10 0 20" FontWeight="Light" FontSize="30" HorizontalAlignment="Center" VerticalAlignment="Top">
+            Order Detail Manager
+            </TextBlock>
+            <StackPanel Orientation="Vertical">
+                <WrapPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 0 0 10">
+                    <StackPanel>
+                        <Label Height="auto" Content="Order Id"/>
+                        <TextBox x:Name="tbOrderId" IsEnabled="False" Width="200" Height="30" Margin="0 0 5 0"/>
+                    </StackPanel>
+                    <StackPanel>
+                        <Label Height="auto" Content="Product Name"/>
+                        <TextBox x:Name="tbProductName" Width="200" Height="30" Margin="0 0 5 0"/>
+                    </StackPanel>
+                    <StackPanel>
+                        <Label Height="auto" Content="Unit Price"/>
+                        <TextBox x:Name="tbUnitPrice" IsEnabled="False" Width="200" Height="30" Margin="0 0 5 0"/>
+                    </StackPanel>
+                    <StackPanel>
+                        <Label Height="auto" Content="Quantity"/>
+                        <TextBox x:Name="tbQuantity" Width="200" Height="30" Margin="0 0 5 0"/>
+                    </StackPanel>
+                    <StackPanel>
+                        <Label Height="auto" Content="Discount"/>
+                        <TextBox x:Name="tbDiscount"  Width="200" Height="30" Margin="0 0 5 0"/>
+                    </StackPanel>
+                  
+                    
+                    <Button x:Name="btnReload" Width="80" Height="30" Padding="5 4" HorizontalAlignment="Right" Margin="0 0 10 0" VerticalAlignment="Bottom" Click="Button_Reload">
+                        Reload
+                    </Button>
+                    <Button  x:Name="btnDelete" IsEnabled="False" Width="80" Height="30" Padding="5 4" HorizontalAlignment="Right" Margin="0 0 10 0" VerticalAlignment="Bottom" Click="Button_Delete">
+                        Delete
+                    </Button>
+                    <Button x:Name="btnEdit" IsEnabled="False" Width="80" Height="30" Padding="5 4" HorizontalAlignment="Right" Margin="0 0 10 0" VerticalAlignment="Bottom" Click="Button_Edit">
+                        Update
+                    </Button>
+                    <Button  Name="btnClear" Width="80" Margin="10 0 10 0" Height="30" Padding="5 4" HorizontalAlignment="Right" VerticalAlignment="Bottom" Click="Button_Clear">
+                        Clear
+                    </Button>
+                </WrapPanel>
+                
+            </StackPanel>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="327*"/>
+                    <ColumnDefinition Width="673*"/>
+                </Grid.ColumnDefinitions>
+                <ListView MaxHeight="160" x:Name="listView" ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.CanContentScroll="False" Width="auto" Grid.Column="0" SizeChanged="ListView_SizeChanged" Grid.ColumnSpan="2">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="Order Id" Width="100" DisplayMemberBinding="{Binding Path=OrderId}"/>
+                            <GridViewColumn Header="Product Id" Width="100" DisplayMemberBinding="{Binding Path=ProductId}"/>
+                            <GridViewColumn Header="Unit Price" Width="100" DisplayMemberBinding="{Binding Path=UnitPrice}"/>
+                            <GridViewColumn Header="Quantity" Width="100" DisplayMemberBinding="{Binding Path=Quantity}"/>
+                            <GridViewColumn Header="Discount" Width="100" DisplayMemberBinding="{Binding Path=Discount}" />
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+            </Grid>
+
+            <StackPanel Orientation="Vertical" Margin="10 0 10 0">
+                <WrapPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 0 0 10">
+                    <StackPanel>
+                        <Label Height="auto" Content="Product Id"/>
+                        <TextBox x:Name="tbPProductId" Width="200" Height="30" Margin="0 0 5 0"/>
+                    </StackPanel>
+                    <StackPanel>
+                        <Label Height="auto" Content="Product Name"/>
+                        <TextBox x:Name="tbPProductName" Width="200" Height="30" Margin="0 0 5 0"/>
+                    </StackPanel>
+
+                    <StackPanel>
+                        <Label Height="auto" Content="Unit Price"/>
+                        <TextBox x:Name="tbPUnitPrice" Width="200" Height="30" Margin="0 0 5 0"/>
+                    </StackPanel>
+                    <StackPanel>
+                        <Label Height="auto" Content="Quantity"/>
+                        <TextBox x:Name="tbPQuantity" Width="200" Height="30" Margin="0 0 5 0" Text="1"/>
+                    </StackPanel>
+                    <StackPanel>
+                        <Label Height="auto" Content="Discount"/>
+                        <TextBox x:Name="tbPDiscount" Width="200" Height="30" Margin="0 0 5 0" Text="0"/>
+                    </StackPanel>
+                   
+                        <Button Name="btnAddProductToOrder" Width="135" Margin="10 0 10 0" Height="30" HorizontalAlignment="Center" VerticalAlignment="Bottom" Click="Button_AddProductToOrder">
+                            Add Product To Order
+                        </Button>
+                   
+                </WrapPanel>
+               
+            </StackPanel>
+            
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+               
+                <ListView MaxHeight="160" x:Name="listViewProducts" ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.CanContentScroll="False" Width="auto" Grid.Row="1" SizeChanged="ListView_SizeChanged">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="Product Id" Width="100" DisplayMemberBinding="{Binding Path=ProductId}"/>
+                            <GridViewColumn Header="Product Name" Width="200" DisplayMemberBinding="{Binding Path=ProductName}"/>
+                            <GridViewColumn Header="Category Id" Width="100" DisplayMemberBinding="{Binding Path=CategoryId}"/>
+                            <GridViewColumn Header="Weight" Width="100" DisplayMemberBinding="{Binding Path=Weight}"/>
+                            <GridViewColumn Header="Unit Price" Width="100" DisplayMemberBinding="{Binding Path=UnitPrice}"/>
+                            <GridViewColumn Header="Units In Stock" Width="100" DisplayMemberBinding="{Binding Path=UnitsInStock}"/>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+            </Grid>
+        </StackPanel>
     </Grid>
 </Window>

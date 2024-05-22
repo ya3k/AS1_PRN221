@@ -18,11 +18,11 @@
                 <WrapPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 0 0 10">
                     <StackPanel>
                         <Label Height="auto" Content="Order Id"/>
-                        <TextBox x:Name="tbOrderId" Width="200" Height="30" Margin="0 0 5 0"/>
+                        <TextBox x:Name="tbOrderId" IsEnabled="False" Width="200" Height="30" Margin="0 0 5 0"/>
                     </StackPanel>
                     <StackPanel>
                         <Label Height="auto" Content="Member Id"/>
-                        <TextBox x:Name="tbMemberId" Width="200" Height="30" Margin="0 0 5 0"/>
+                        <TextBox x:Name="tbMemberId" IsEnabled="False" Width="200" Height="30" Margin="0 0 5 0"/>
                     </StackPanel>
                     <StackPanel>
                         <Label Height="auto" Content="Order Date"/>
@@ -38,7 +38,7 @@
                     </StackPanel>
                     <StackPanel>
                         <Label Height="auto" Content="Freight"/>
-                        <TextBox x:Name="tbFreight" Width="200" Height="30" Margin="0
+                        <TextBox IsEnabled="False" x:Name="tbFreight" Width="200" Height="30" Margin="0
                 0 5 0"/>
                     </StackPanel>
                     <Button Width="80" Height="30" Padding="5 4" HorizontalAlignment="Right" VerticalAlignment="Bottom" Click="Button_Search">
@@ -53,13 +53,17 @@
                     <Button Name="btnClear"  Width="80" Margin="10 0 10 0" Height="30" Padding="5 4" HorizontalAlignment="Right" VerticalAlignment="Bottom" Click="Button_Clear">
                         Clear
                     </Button>
-                    <Button Visibility="Hidden" x:Name="btnEdit" IsEnabled="False" Width="80" Height="30" Padding="5 4" HorizontalAlignment="Right" Margin="0 0 10 0" Click="Button_Edit">
-                        Edit
+                    <Button Visibility="Visible" x:Name="btnEdit" IsEnabled="True" Width="80" Height="30" Padding="5 4" HorizontalAlignment="Right" Margin="0 0 10 0" Click="Button_Edit">
+                        Update
                     </Button>
                     <Button Width="80" Visibility="Hidden" Height="30" Padding="5 4" HorizontalAlignment="Right" Margin="0 0 0 0" Click="Button_Insert">
                         Add New
                     </Button>
+                    <Button x:Name="btnDetail" Width="100" Height="30" Padding="5 4" HorizontalAlignment="Right" Margin="0 0 0 0" Click="Button_ViewDetail">
+                        View OrderDetail
+                    </Button>
                 </StackPanel>
+                
             </StackPanel>
             <Grid>
                 <Grid.ColumnDefinitions>
