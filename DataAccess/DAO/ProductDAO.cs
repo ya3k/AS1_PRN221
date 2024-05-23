@@ -1,4 +1,5 @@
 ﻿using BusinessObject.Entity;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,7 +35,7 @@ namespace DataAccess.DAO
             {
                 using (var salesDB = new As1storeContext())
                 {
-                    product = salesDB.Products.SingleOrDefault(predicate);
+                    product = salesDB.Products.Include(or => or.OrderDetails).Include(c => c.Category).SingleOrDefault(predicate);
                 }
             }
             catch (Exception e)
@@ -52,7 +53,7 @@ namespace DataAccess.DAO
             {
                 using (var salesDB = new As1storeContext())
                 {
-                    products = salesDB.Products.Where(predicate).ToList();
+                    products = salesDB.Products.Include(o => o.OrderDetails).Include(c => c.Category).Where(predicate).ToList();
                 }
             }
             catch (Exception e)
@@ -158,7 +159,23 @@ namespace DataAccess.DAO
             }
         }
         
-
+        public IEnumerable<Product> GetProductByOrderDayNow()
+        {
+            var orderDay = DateTime.Now.Date;
+            IEnumerable<Product> products = new List<Product>();
+            try
+            {
+                using (var salesDB = new As1storeContext())
+                {
+                    products = salesDB.Products.Where(p => p.OrderDetails.OrderByDescending(m => m.Quantity).Any(od => od.Order.OrderDate == orderDay)).ToList();
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+            return products;
+        }
 
 
     }

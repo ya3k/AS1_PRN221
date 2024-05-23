@@ -1,4 +1,5 @@
 ﻿using BusinessObject.Entity;
+using BusinessObject.ViewModel;
 using DataAccess.DAO;
 using System;
 using System.Collections.Generic;
@@ -51,9 +52,16 @@ namespace DataAccess.Repository
            OrderDetailDAO.Instance.DeleteOrderDetail(orderDetail);
         }
 
+        public IEnumerable<ReportSaleObject> ReportSales()
+        {
+           return OrderDetailDAO.Instance.CountProductReport();
+        }
+
         public void UpdateOrderDetail(OrderDetail orderDetail)
         {
             OrderDetailDAO.Instance.UpdateOrderDetail(orderDetail);
         }
+
+       
     }
 }

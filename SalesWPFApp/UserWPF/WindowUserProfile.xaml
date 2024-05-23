@@ -30,13 +30,24 @@
             </Grid>
             <Grid DockPanel.Dock="Left" Width="180">
                 <TreeView Name="Menu" BorderThickness="0">
-                    <TreeViewItem Header="Profile" IsSelected="False" FontSize="20" Foreground="DarkBlue" FontWeight="Light" Margin="0 0 0 10">
-                        <TreeViewItem Header="Profile" FontSize="14" Margin="0 10 0 0" MouseDoubleClick="Goto_Profile"/>
-                        <TreeViewItem Header="Order History" FontSize="14" Margin="0 10 0 0" MouseDoubleClick="Goto_OrderHistory"/>
+                    <TreeView.ItemContainerStyle>
+                        <Style TargetType="TreeViewItem">
+                            <Setter Property="Foreground" Value="Blue"/>
+                            <Setter Property="FontSize" Value="14"/>
+                            <Setter Property="Margin" Value="0 5"/>
+                            <Setter Property="Padding" Value="5"/>
 
-                    </TreeViewItem>
-                 
-                    
+                            <Style.Triggers>
+                                <Trigger Property="IsSelected" Value="True">
+                                    <Setter Property="Background" Value="LightGray"/>
+                                    <Setter Property="FontWeight" Value="DemiBold"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </TreeView.ItemContainerStyle>
+                    <TreeViewItem Header="Profile" FontSize="14" Margin="0 10 0 0" MouseDoubleClick="Goto_Profile"/>
+                    <TreeViewItem Header="Order History" FontSize="14" Margin="0 10 0 0" MouseDoubleClick="Goto_OrderHistory"/>
+
                 </TreeView>
             </Grid>
             <Grid>

@@ -18,6 +18,8 @@ namespace DataAccess.Repository
         IEnumerable<Product> FindByName(string name);
         IEnumerable<Product> FindByPrice(decimal price);
         IEnumerable<Product> FindByStock(int stock);
+        IEnumerable<Product> FindByOrderDayNow();
         Product FindByProductName(string name);
+
     }
 }

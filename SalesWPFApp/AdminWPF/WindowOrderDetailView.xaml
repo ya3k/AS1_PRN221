@@ -114,12 +114,12 @@
                 <ListView MaxHeight="160" x:Name="listViewProducts" ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.CanContentScroll="False" Width="auto" Grid.Row="1" SizeChanged="ListView_SizeChanged">
                     <ListView.View>
                         <GridView>
-                            <GridViewColumn Header="Product Id" Width="100" DisplayMemberBinding="{Binding Path=ProductId}"/>
-                            <GridViewColumn Header="Product Name" Width="200" DisplayMemberBinding="{Binding Path=ProductName}"/>
-                            <GridViewColumn Header="Category Id" Width="100" DisplayMemberBinding="{Binding Path=CategoryId}"/>
-                            <GridViewColumn Header="Weight" Width="100" DisplayMemberBinding="{Binding Path=Weight}"/>
-                            <GridViewColumn Header="Unit Price" Width="100" DisplayMemberBinding="{Binding Path=UnitPrice}"/>
-                            <GridViewColumn Header="Units In Stock" Width="100" DisplayMemberBinding="{Binding Path=UnitsInStock}"/>
+                            <GridViewColumn Header="Product Id" Width="80" DisplayMemberBinding="{Binding Path=ProductId}"/>
+                            <GridViewColumn Header="Product Name" Width="100" DisplayMemberBinding="{Binding Path=ProductName}"/>
+                            <GridViewColumn Header="Category Id" Width="80" DisplayMemberBinding="{Binding Path=CategoryId}"/>
+                            <GridViewColumn Header="Weight" Width="80" DisplayMemberBinding="{Binding Path=Weight}"/>
+                            <GridViewColumn Header="Unit Price" Width="80" DisplayMemberBinding="{Binding Path=UnitPrice}"/>
+                            <GridViewColumn Header="Units In Stock" Width="80" DisplayMemberBinding="{Binding Path=UnitsInStock}"/>
                         </GridView>
                     </ListView.View>
                 </ListView>

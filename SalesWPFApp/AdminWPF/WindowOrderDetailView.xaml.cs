@@ -47,6 +47,7 @@ namespace SalesWPFApp.AdminWPF
         private void RefreshListView()
         {
             listView.ItemsSource = _orderDetailRepository.FindByOrderId(_order.OrderId);
+            listViewProducts.ItemsSource = _productRepository.ListProduct();
         }
 
         private void Button_AddProductToOrder(object sender, RoutedEventArgs e)
@@ -83,13 +84,35 @@ namespace SalesWPFApp.AdminWPF
                             Quantity = quantity,
                             Discount = discount
                         };
+                        
+                        if(selectedProduct.UnitsInStock < quantity || selectedProduct.UnitsInStock == 0)
+                        {
+                            MessageBox.Show("Not enough stock to add this product.");
+                            return;
+                        }
+
                         _orderDetailRepository.AddOrderDetail(newOrderDetail);
+
+                        //decrease stock
+                        selectedProduct.UnitsInStock -= quantity;                   
+
+                        _productRepository.Update(selectedProduct);
+
                     }
                     else
                     {
                         orderDetail.Quantity += quantity;
                         orderDetail.Discount += discount;
+                        if (selectedProduct.UnitsInStock == 0)
+                        {
+                            MessageBox.Show("Not enough stock to add this product.");
+                            return;
+                        }
                         _orderDetailRepository.UpdateOrderDetail(orderDetail);
+
+                        //decrease stock
+                        selectedProduct.UnitsInStock -= quantity;
+                        _productRepository.Update(selectedProduct);
                     }
 
                     RefreshListView();
@@ -116,7 +139,7 @@ namespace SalesWPFApp.AdminWPF
                 double width = listView.ActualWidth - SystemParameters.VerticalScrollBarWidth;
 
                 if (width > 0)
-                {
+                {       
                     double column1 = 0.2;
                     double column2 = 0.2;
                     double column3 = 0.2;

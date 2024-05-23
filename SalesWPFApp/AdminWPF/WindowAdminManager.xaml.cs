@@ -41,22 +41,28 @@ namespace SalesWPFApp.AdminWPF
             _windowLogin.Show();
         }
 
-        private void Goto_AdminMemberManager(object sender, RoutedEventArgs e)
+        private void Goto_AdminMemberManager(object sender, MouseButtonEventArgs e)
         {
             PageAdminMemberManager pageAdminMemberManager = new PageAdminMemberManager(_memberRepository);
             frameAdmin.Content = pageAdminMemberManager;
         }
 
-        private void Goto_AdminProductManager(object sender, RoutedEventArgs e)
+        private void Goto_AdminProductManager(object sender, MouseButtonEventArgs e)
         {
             PageAdminProductManager pageAdminProductManager = new PageAdminProductManager(_productRepository);
             frameAdmin.Content = pageAdminProductManager;
         }
 
-        private void Goto_AdminOrderManager(object sender, RoutedEventArgs e)
+        private void Goto_AdminOrderManager(object sender, MouseButtonEventArgs e)
         {
             PageAdminOrderManager pageAdminOrderManager = new PageAdminOrderManager(_orderRepository, _memberRepository, _productRepository, _orderDetailRepository);
             frameAdmin.Content = pageAdminOrderManager;
+        }
+
+        private void Goto_ReportSales(object sender, MouseButtonEventArgs e)
+        {
+            PageReportSales pageReportSales = new PageReportSales(_productRepository, _orderDetailRepository);
+            frameAdmin.Content = pageReportSales;
         }
 
     }

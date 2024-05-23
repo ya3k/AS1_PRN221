@@ -64,5 +64,10 @@ namespace DataAccess.Repository
         {
             return ProductDAO.Instance.FindOne(product => product.ProductName == name);
         }
+
+        public IEnumerable<Product> FindByOrderDayNow()
+        {
+           return ProductDAO.Instance.FindAll(product => product.OrderDetails.OrderByDescending(o => o.Quantity).Any(orderDetail => orderDetail.Order.OrderDate.Date == DateTime.Now.Date));
+        }
     }
 }
