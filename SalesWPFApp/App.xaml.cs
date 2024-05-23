@@ -1,7 +1,6 @@
 ﻿using DataAccess.Repository;
 using Microsoft.Extensions.DependencyInjection;
 using SalesWPFApp.AdminWPF;
-using SalesWPFApp.CartWPF;
 using SalesWPFApp.UserWPF;
 using System.Configuration;
 using System.Data;
@@ -49,7 +48,6 @@ namespace SalesWPFApp
             services.AddSingleton<WindowProductCreate>();
             services.AddSingleton<WindowOrderCreate>();
             services.AddSingleton<WindowStore>();
-            services.AddSingleton<WindowCart>();
 
             
 

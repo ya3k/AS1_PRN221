@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:SalesWPFApp.AdminWPF"
         mc:Ignorable="d"
         Loaded="Window_Loaded"
-        WindowStartupLocation="CenterOwner"
+        WindowStartupLocation="CenterScreen"
         Title="WindowMemberCreate" Height="500" Width="600">
     <Window.Resources>
         <!-- Button -->

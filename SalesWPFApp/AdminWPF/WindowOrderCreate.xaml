@@ -11,7 +11,7 @@
     <Window.Resources>
         <!-- Button -->
         <Style TargetType="{x:Type Button}" x:Key="btnPrimary">
-            <Setter Property="Background" Value="OrangeRed"/>
+            <Setter Property="Background" Value="Blue"/>
             <Setter Property="Padding" Value="20 5"/>
             <Setter Property="Foreground" Value="White"/>
             <Setter Property="FontSize" Value="14"/>
@@ -19,12 +19,12 @@
 
         <!-- Text Block -->
         <Style TargetType="{x:Type TextBlock}" x:Key="headingPrimary">
-            <Setter Property="Foreground" Value="OrangeRed"/>
+            <Setter Property="Foreground" Value="DarkBlue"/>
             <Setter Property="FontSize" Value="30"/>
             <Setter Property="FontWeight" Value="Bold"/>
         </Style>
         <Style TargetType="{x:Type TextBlock}" x:Key="headingSecondary">
-            <Setter Property="Foreground" Value="OrangeRed"/>
+            <Setter Property="Foreground" Value="DarkBlue"/>
             <Setter Property="FontSize" Value="20"/>
             <Setter Property="FontWeight" Value="Medium"/>
         </Style>

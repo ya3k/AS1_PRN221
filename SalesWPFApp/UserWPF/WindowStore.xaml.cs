@@ -1,6 +1,5 @@
 ﻿using BusinessObject.Entity;
 using DataAccess.Repository;
-using SalesWPFApp.CartWPF;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -37,7 +36,7 @@ namespace SalesWPFApp.UserWPF
             _memberRepository = memberRepository;
             _orderRepository = orderRepository;
             ListProduct.ItemsSource = _productRepository.ListProduct();
-            Cart.carts = new List<OrderDetail>();
+            //Cart.carts = new List<OrderDetail>();
             UpdateCartQuantity();
         }
 
@@ -102,54 +101,54 @@ namespace SalesWPFApp.UserWPF
 
         private void Button_OpenCart(object sender, RoutedEventArgs e)
         {
-            WindowCart windowCart = new WindowCart(this, _memberRepository, _orderRepository);
-            windowCart.Show();
-            this.Hide();
+            //WindowCart windowCart = new WindowCart(this, _memberRepository, _orderRepository);
+            //windowCart.Show();
+            //this.Hide();
         }
 
         private void AddToCart(object sender, RoutedEventArgs e)
         {
-            Button? button = (Button)sender;
-            if(button != null)
-            {
-                  var tag = button.Tag;
-                if(!string.IsNullOrEmpty(tag.ToString()))
-                {
-                    int id = int.Parse(tag.ToString());
-                    Product product = _productRepository.FindById(id);
-                    OrderDetail orderDetail = new OrderDetail()
-                    {
-                        ProductId = product.ProductId,
-                        UnitPrice = product.UnitPrice,
-                        Quantity = 1,
-                        Product = product,
-                        Discount = 0
-                    };
-                    if (Cart.carts == null)
-                    {
-                        Cart.carts = new List<OrderDetail>{orderDetail};   
-                    }
-                    else
-                    {
-                        int index = Cart.carts.FindIndex(x => x.ProductId == id);
-                        if (index == -1)
-                        {
-                            Cart.carts.Add(orderDetail);
-                        }
-                        else
-                        {
-                            Cart.carts[index].Quantity++;
-                        }
-                    }
-                }
-            }
+            //Button? button = (Button)sender;
+            //if(button != null)
+            //{
+            //      var tag = button.Tag;
+            //    if(!string.IsNullOrEmpty(tag.ToString()))
+            //    {
+            //        int id = int.Parse(tag.ToString());
+            //        Product product = _productRepository.FindById(id);
+            //        OrderDetail orderDetail = new OrderDetail()
+            //        {
+            //            ProductId = product.ProductId,
+            //            UnitPrice = product.UnitPrice,
+            //            Quantity = 1,
+            //            Product = product,
+            //            Discount = 0
+            //        };
+            //        if (Cart.carts == null)
+            //        {
+            //            Cart.carts = new List<OrderDetail>{orderDetail};   
+            //        }
+            //        else
+            //        {
+            //            int index = Cart.carts.FindIndex(x => x.ProductId == id);
+            //            if (index == -1)
+            //            {
+            //                Cart.carts.Add(orderDetail);
+            //            }
+            //            else
+            //            {
+            //                Cart.carts[index].Quantity++;
+            //            }
+            //        }
+            //    }
+            //}
 
-            UpdateCartQuantity();
+            //UpdateCartQuantity();
         }
 
         public void UpdateCartQuantity()
         {
-            CartCount.Text = Cart.carts.Sum(product => product.Quantity).ToString();
+            //CartCount.Text = Cart.carts.Sum(product => product.Quantity).ToString();
         }
 
         private void Button_OpenMyOrder(object sender, RoutedEventArgs e)

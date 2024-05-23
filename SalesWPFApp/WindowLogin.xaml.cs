@@ -35,7 +35,7 @@ namespace SalesWPFApp
                 var member = _memberRepository.FindByEmail(username);
                 if (memLogin == 0)
                 {
-                    Cart.Email = username;
+                    //Cart.Email = username;
                     WindowAdminManager windowAdminManager = new WindowAdminManager(this,_memberRepository, _productRepository, _orderRepository,_orderDetailRepository);
                     windowAdminManager.Show();
                     this.Hide();
