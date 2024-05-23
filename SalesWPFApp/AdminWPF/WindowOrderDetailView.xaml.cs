@@ -197,7 +197,7 @@ namespace SalesWPFApp.AdminWPF
                     MessageBox.Show("Order Detail deleted successfully.");
                     RefreshListView();
                 }
-              
+
             }
         }
 
@@ -231,10 +231,18 @@ namespace SalesWPFApp.AdminWPF
             }
         }
 
-      
+
         private void Button_Reload(object sender, RoutedEventArgs e)
         {
-           RefreshListView();
+            RefreshListView();
+        }
+
+        private void Button_SearchProduct(object sender, RoutedEventArgs e)
+        {
+            var productName = tbPProductName.Text.ToString();
+            listViewProducts.ItemsSource = _productRepository.FindByName(productName);
+
+
         }
     }
 }
