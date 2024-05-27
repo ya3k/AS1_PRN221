@@ -3,6 +3,7 @@ using DataAccess.DAO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -68,6 +69,26 @@ namespace DataAccess.Repository
         public IEnumerable<Product> FindByOrderDayNow()
         {
            return ProductDAO.Instance.FindAll(product => product.OrderDetails.OrderByDescending(o => o.Quantity).Any(orderDetail => orderDetail.Order.OrderDate.Date == DateTime.Now.Date));
+        }
+
+        public IEnumerable<Category> FindAllCategories()
+        {
+            return CategoryDAO.Instance.ListCategory();
+        }   
+
+        public Category FinfByCateName(string name)
+        {
+            return CategoryDAO.Instance.FindOne(c => c.CategoryName.Equals(name));
+        }
+
+        public Category FinfById(int id)
+        {
+            return CategoryDAO.Instance.FindOne(c => c.CategoryId == id);
+        }
+
+        public IEnumerable<Product> FindByOrderId(int OrderId)
+        {
+            return ProductDAO.Instance.FindAll(product => product.OrderDetails.Any(orderDetail => orderDetail.OrderId == OrderId));
         }
     }
 }

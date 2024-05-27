@@ -14,11 +14,11 @@ public partial class Order
 
     public int OrderId { get; set; }
     public int MemberId { get; set; }
-    [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
+    [DisplayFormat(DataFormatString = "{dd/MM/yyyy}")]
     public DateTime OrderDate { get; set; }
-    [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
+    [DisplayFormat(DataFormatString = "{dd/MM/yyyy}")]
     public DateTime? RequiredDate { get; set; }
-    [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
+    [DisplayFormat(DataFormatString = "{dd/MM/yyyy}")]
     public DateTime? ShippedDate { get; set; }
     public decimal? Freight { get; set; }
 

@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:SalesWPFApp.UserWPF"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="1000"
-      Title="PageMemberProfile">
+      Title="PageMemberProfile">   
     <Page.Resources>
         <!-- Button -->
         <Style TargetType="{x:Type Button}" x:Key="btnPrimary">
@@ -20,7 +20,7 @@
         <Style TargetType="{x:Type TextBlock}" x:Key="headingPrimary">
             <Setter Property="Foreground" Value="OrangeRed"/>
             <Setter Property="FontSize" Value="30"/>
-            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="FontWeight" Value="Bold"/> 
         </Style>
         <Style TargetType="{x:Type TextBlock}" x:Key="headingSecorndary">
             <Setter Property="Foreground" Value="OrangeRed"/>

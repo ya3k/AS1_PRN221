@@ -68,6 +68,13 @@ namespace DataAccess.DAO
                 {
                     using (var salesDB = new As1storeContext())
                     {
+                        foreach(OrderDetail orderDetail in order.OrderDetails)
+                        {
+                            Product product = ProductDAO.Instance.FindOne(p => p.ProductId == orderDetail.ProductId);
+                            product.UnitsInStock -= orderDetail.Quantity;
+                            ProductDAO.Instance.UpdateProduct(product);
+                        }
+
                         salesDB.Orders.Add(order);
                         salesDB.SaveChanges();
                     }

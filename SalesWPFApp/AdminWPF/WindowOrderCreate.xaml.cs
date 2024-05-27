@@ -119,9 +119,10 @@ namespace SalesWPFApp.AdminWPF
                 if (order == null)
                 {
                     // Create a new order
-                    var memEmail = comboBoxMember.Text;
-                    var mem = _memberRepository.FindByEmail(memEmail);
-                    if (mem == null)
+                    //var memEmail = comboBoxMember.Text;
+                    //var mem = _memberRepository.FindByEmail(memEmail);
+                    var memID = (Member)comboBoxMember.SelectedItem;
+                    if (memID == null)
                     {
                         MessageBox.Show("Invalid member selected.");
                         return;
@@ -129,7 +130,7 @@ namespace SalesWPFApp.AdminWPF
 
                     Order newOrder = new Order
                     {
-                        MemberId = mem.MemberId,
+                        MemberId = memID.MemberId,
                         OrderDate = orderDate,
                         RequiredDate = requiredDate,
                         ShippedDate = shippedDate,

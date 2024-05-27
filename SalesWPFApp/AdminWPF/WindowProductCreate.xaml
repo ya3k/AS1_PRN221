@@ -46,6 +46,14 @@
             <Setter Property="FontSize" Value="14"/>
             <Setter Property="Padding" Value="2 4"/>
             <Setter Property="HorizontalAlignment" Value="Stretch"/>
+            
+        </Style>
+        <!-- ComboBox -->
+        <Style TargetType="{x:Type ComboBox}" x:Key="comboboxPrimary">
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Padding" Value="2 4"/>
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
         </Style>
     </Window.Resources>
 
@@ -57,8 +65,11 @@
             <StackPanel Background="White" HorizontalAlignment="Center" VerticalAlignment="Center" Width="300">
                 <Label Content="Product Id" x:Name="labelProductId" Visibility="Collapsed" IsEnabled="False" Style="{StaticResource labelPrimary}"/>
                 <TextBox x:Name="txtBoxProductId" Margin="0 0 0 5" Visibility="Collapsed" IsEnabled="False" Style="{StaticResource textboxPrimary}"/>
-                <Label Content="Category Id" Style="{StaticResource labelPrimary}"/>
-                <TextBox x:Name="txtBoxCategoryId" Margin="0 0 0 5" Style="{StaticResource textboxPrimary}"/>
+                <Label Content="Category" Style="{StaticResource labelPrimary}"/>
+                <ComboBox x:Name="comboBoxMCategory"  Margin="0 0 0 5" Style="{StaticResource comboboxPrimary}">
+
+                </ComboBox> 
+                <TextBox x:Name="txtBoxCategoryId" Visibility="Collapsed" Margin="0 0 0 5" Style="{StaticResource textboxPrimary}"/>
                 <Label Content="Product Name" Style="{StaticResource labelPrimary}"/>
                 <TextBox x:Name="txtBoxProductName" Margin="0 0 0 5" Style="{StaticResource textboxPrimary}"/>
                 <Label Content="Weight" Style="{StaticResource labelPrimary}"/>

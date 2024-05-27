@@ -34,30 +34,42 @@ namespace SalesWPFApp.AdminWPF
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            comboBoxMCategory.ItemsSource = _productRepository.FindAllCategories();
+            comboBoxMCategory.DisplayMemberPath = "CategoryName";
+            comboBoxMCategory.SelectedValuePath = "CategoryId";
             if (product != null)
             {
+                var catName = _productRepository.FinfById(product.CategoryId);
+
+
                 txtBoxProductName.Text = product.ProductName;
                 txtBoxUnitPrice.Text = product.UnitPrice.ToString();
                 txtBoxUnitsInStock.Text = product.UnitsInStock.ToString();
                 txtBoxWeight.Text = product.Weight.ToString();
                 txtBoxCategoryId.Text = product.CategoryId.ToString();
+                comboBoxMCategory.Text = catName.CategoryName.ToString();
+             
                 txtBoxProductId.Visibility = Visibility.Visible;
                 labelProductId.Visibility = Visibility.Visible;
                 btnCreate.Content = "Update";
                 this.Height = 550;
             }
+           
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             try
             {
+
+                
+                var cateSelect = (Category)comboBoxMCategory.SelectedItem;
                 if (product == null)
                 {
                     Product product = new Product
                     {
                         ProductName = txtBoxProductName.Text,
-                        CategoryId = int.Parse(txtBoxCategoryId.Text),
+                        CategoryId = cateSelect.CategoryId,
                         Weight = float.Parse(txtBoxWeight.Text),
                         UnitPrice = decimal.Parse(txtBoxUnitPrice.Text),
                         UnitsInStock = int.Parse(txtBoxUnitsInStock.Text)
@@ -67,7 +79,7 @@ namespace SalesWPFApp.AdminWPF
                 else
                 {
                     product.ProductName = txtBoxProductName.Text;
-                    product.CategoryId = int.Parse(txtBoxCategoryId.Text);
+                    product.CategoryId = cateSelect.CategoryId;
                     product.Weight = float.Parse(txtBoxWeight.Text);
                     product.UnitPrice = decimal.Parse(txtBoxUnitPrice.Text);
                     product.UnitsInStock = int.Parse(txtBoxUnitsInStock.Text);

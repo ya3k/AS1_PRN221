@@ -130,8 +130,13 @@ namespace SalesWPFApp.AdminWPF
 
         private void Button_Insert(object sender, RoutedEventArgs e)
         {
-            WindowOrderCreate windowOrderCreate = new WindowOrderCreate(this, _orderRepository, _memberRepository, null);
-            windowOrderCreate.ShowDialog();
+            //Order orderId = (Order)listView.SelectedItems;
+            //var listProduct = _productRepository.FindByOrderId(orderId.OrderId);
+
+            //WindowOrderCreate windowOrderCreate = new WindowOrderCreate(this, _orderRepository, _memberRepository, null);
+            //windowOrderCreate.ShowDialog();
+            WindowOrderCr windowOrderCr = new WindowOrderCr(this, _orderRepository, _productRepository, _orderDetailRepository, _memberRepository, null, null);
+            windowOrderCr.ShowDialog();
         }
 
         private void ListView_SizeChanged(object sender, SizeChangedEventArgs e)
