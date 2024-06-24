@@ -53,7 +53,7 @@ namespace DataAccess.DAO
             IEnumerable<Order> orders = new List<Order>();
             using (var salesDB = new As1storeContext())
             {
-                orders = salesDB.Orders.Include(o => o.Member).Where(predicate).ToList();
+                orders = salesDB.Orders.Include(o => o.Member).Include(o => o.OrderDetails).Where(predicate).ToList();
             }
             return orders;
         }

@@ -108,7 +108,33 @@ namespace SalesWPFApp.AdminWPF
 
         private void Button_Search(object sender, RoutedEventArgs e)
         {
+            var startDate = dpStartDate.SelectedDate;
+            var endDate = dpEndDate.SelectedDate;
+            try
+            {
+                if (startDate == null || endDate == null)
+                {
+                    MessageBox.Show("Please select start date and end date");
+                    return;
+                }
+                if (startDate > endDate)
+                {
+                    MessageBox.Show("Start date must be less than end date");
+                    return;
+                }
+                listOrderDetail.ItemsSource = _orderDetailRepository.FindByDate(startDate.Value, endDate.Value);
 
+            }catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
+        }
+
+        private void Button_Clear(object sender, RoutedEventArgs e)
+        {
+            dpEndDate.SelectedDate = null;
+            dpStartDate.SelectedDate = null;
         }
     }
 

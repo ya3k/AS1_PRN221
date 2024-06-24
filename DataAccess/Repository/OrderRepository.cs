@@ -13,6 +13,7 @@ namespace DataAccess.Repository
         public void Add(Order order)
         {
             OrderDAO.Instance.AddOrder(order);  
+            
         }
 
         public IEnumerable<Order> FindAllByStartTimeAndEndTime(DateTime start, DateTime end)
@@ -41,7 +42,7 @@ namespace DataAccess.Repository
         }
 
         public IEnumerable<Order> List()
-        {
+        {                                                                                                                                                                                                           
             return OrderDAO.Instance.GetListOrder();
         }
 

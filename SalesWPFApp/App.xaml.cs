@@ -39,7 +39,7 @@ namespace SalesWPFApp
             services.AddSingleton<PageOrderHistory>();
             services.AddSingleton<PageMemberProfile>();
 
-
+            services.AddSingleton<WindowOrderCr>();
             services.AddSingleton<PageReportSales>();
             services.AddSingleton<PageAdminMemberManager>();
             services.AddSingleton<PageAdminProductManager>();

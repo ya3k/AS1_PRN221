@@ -30,7 +30,7 @@ namespace DataAccess.DAO
                 }
 
             }
-        }   
+        }
 
         public OrderDetail FindOne(Expression<Func<OrderDetail, bool>> pridecate)
         {
@@ -116,7 +116,8 @@ namespace DataAccess.DAO
                     orderDetails = salesDB.OrderDetails.ToList();
                 }
                 return orderDetails;
-            }catch(Exception e)
+            }
+            catch (Exception e)
             {
                 throw new Exception(e.Message);
             }
@@ -126,13 +127,14 @@ namespace DataAccess.DAO
         {
             try
             {
-                
-                using(var salesDB = new As1storeContext())
+
+                using (var salesDB = new As1storeContext())
                 {
                     salesDB.Remove(orderDetail);
                     salesDB.SaveChanges();
                 }
-            }catch(Exception e)
+            }
+            catch (Exception e)
             {
                 throw new Exception(e.Message);
             }
@@ -152,7 +154,7 @@ namespace DataAccess.DAO
                         .GroupBy(m => m.ProductId)
                         .Select(m => new
                         {
-                            ProductId = m.Key,  
+                            ProductId = m.Key,
                             ProductName = m.Select(m => m.Product.ProductName).FirstOrDefault(),
                             TotalQuantity = m.Sum(m => m.Quantity),
                             Total = m.Sum(m => m.Quantity * m.Product.UnitPrice)
@@ -168,7 +170,7 @@ namespace DataAccess.DAO
                             ProductName = item.ProductName,
                             Total = item.Total,
 
-                            
+
                         };
                         saleObjects.Add(orderDetail);
                     }
@@ -182,5 +184,36 @@ namespace DataAccess.DAO
         }
 
 
+        public IEnumerable<ReportSaleObject> CountProductReportWithDate(DateTime startDate, DateTime endDate)
+        {
+            try
+            {
+                using (var salesDB = new As1storeContext())
+                {
+                    var totalQuantity = salesDB.OrderDetails
+                        .Include(od => od.Product)
+                        .Include(od => od.Order)
+                        .Where(od => od.Order.OrderDate >= startDate && od.Order.OrderDate <= endDate)
+                        .GroupBy(od => new { od.ProductId, od.Product.ProductName })
+                        .Select(g => new ReportSaleObject
+                        {
+                            ProductId = g.Key.ProductId,
+                            ProductName = g.Key.ProductName,
+                            Quantity = g.Sum(x => x.Quantity),
+                            Total = g.Sum(x => x.Quantity * x.UnitPrice)
+                        })
+                        .ToList();
+
+                    return totalQuantity;
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception("An error occurred while generating the product report: " + e.Message, e);
+            }
+        }
     }
+
+
+
 }

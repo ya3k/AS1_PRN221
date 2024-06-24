@@ -22,6 +22,11 @@ namespace DataAccess.Repository
             return OrderDetailDAO.Instance.FindAll(orderDetail => orderDetail.Order.Member.MemberId == userID);
         }
 
+        public IEnumerable<ReportSaleObject> FindByDate(DateTime startDate, DateTime endTime)
+        {
+            return OrderDetailDAO.Instance.CountProductReportWithDate(startDate, endTime);
+        }
+
         public IEnumerable<OrderDetail> FindByOrderId(int orderId)
         {
             return OrderDetailDAO.Instance.FindAll(orderDetail => orderDetail.OrderId == orderId);

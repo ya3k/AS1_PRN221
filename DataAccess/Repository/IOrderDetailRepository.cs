@@ -20,5 +20,6 @@ namespace DataAccess.Repository
         OrderDetail FindByOrderIdAndProductId(int orderId, int productId);
         IEnumerable<OrderDetail> ListDettailOrderIdAndProductId(int orderId, int productId);
         IEnumerable<ReportSaleObject> ReportSales();
+        IEnumerable<ReportSaleObject> FindByDate(DateTime startDate, DateTime endTime);
     }
 }

@@ -30,7 +30,7 @@ namespace SalesWPFApp.AdminWPF
         private readonly IMemberRepository _memberRepository;
         private Order? order;
         private IEnumerable<Product>? _products;
-        public WindowOrderCr(PageAdminOrderManager pageAdminOrderManager, IOrderRepository orderRepository, IProductRepository productRepository,IOrderDetailRepository orderDetailRepository, IMemberRepository memberRepository, Order order, IEnumerable<Product>? products)
+        public WindowOrderCr(PageAdminOrderManager pageAdminOrderManager, IOrderRepository orderRepository, IProductRepository productRepository, IOrderDetailRepository orderDetailRepository, IMemberRepository memberRepository, Order order, IEnumerable<Product>? products)
         {
             InitializeComponent();
             _pageAdminOrderManager = pageAdminOrderManager;
@@ -95,7 +95,7 @@ namespace SalesWPFApp.AdminWPF
                 }
                 Order o = new Order
                 {
-                    MemberId =memID.MemberId,
+                    MemberId = memID.MemberId,
                     Freight = 10,
                     OrderDate = DateTime.Now,
                     RequiredDate = DateTime.Now.AddDays(5),
@@ -134,21 +134,62 @@ namespace SalesWPFApp.AdminWPF
 
         private void productList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-           
+
         }
 
+        //private void DecreaseButton_Click(object sender, RoutedEventArgs e)
+        //{
+        //    var button = sender as Button;
+        //    Product product = button.DataContext as Product;
+        //    if (product != null && product.Quantity > 0)
+        //    {
+        //        product.Quantity--;
+        //        productList.Items.Refresh();
+        //    }
+        //    else
+        //    {
+        //        MessageBox.Show("Not enough product");
+        //    }
+        //}
+
+        //private void IncreaseButton_Click(object sender, RoutedEventArgs e)
+        //{
+        //    var button = sender as Button;
+        //    Product product = button.DataContext as Product;
+        //    if (product != null && product.Quantity <= product.UnitsInStock)
+        //    {
+        //        product.Quantity++;
+        //        productList.Items.Refresh();
+        //    }
+        //    else
+        //    {
+        //        MessageBox.Show("Not enough product");
+        //    }
+        //}
         private void DecreaseButton_Click(object sender, RoutedEventArgs e)
         {
             var button = sender as Button;
             Product product = button.DataContext as Product;
-            if (product != null && product.Quantity > 0)
+            if (product != null)
             {
-                product.Quantity--;
-                productList.Items.Refresh();
-            }
-            else
-            {
-                MessageBox.Show("Not enough product");
+                if (product.UnitsInStock == 0)
+                {
+                    MessageBox.Show("Product is out of stock.");
+                    return;
+                }
+
+                if (product.Quantity > 0)
+                {
+                    
+                    product.Quantity--;
+                    product.UnitsInStock++; // Increase stock since we are decreasing quantity
+
+                    productList.Items.Refresh();
+                }
+                else
+                {
+                    MessageBox.Show("Quantity is 0.");
+                }
             }
         }
 
@@ -156,41 +197,52 @@ namespace SalesWPFApp.AdminWPF
         {
             var button = sender as Button;
             Product product = button.DataContext as Product;
-            if (product != null && product.Quantity <= product.UnitsInStock)
+            if (product != null)
             {
-                product.Quantity++;
-                productList.Items.Refresh();
-            }
-            else
-            {
-                MessageBox.Show("Not enough product");
+                if (product.UnitsInStock == 0)
+                {
+                    MessageBox.Show("Product is out of stock.");
+                    return;
+                }
+
+                if (product.Quantity < product.UnitsInStock)
+                {
+                    product.Quantity++;
+                    product.UnitsInStock--;
+                    productList.Items.Refresh();
+                }
+                else
+                {
+                    MessageBox.Show("Not enough product.");
+                }
             }
         }
+
 
 
         private void RefreshListProduct()
         {
-            if(_products == null)
+            if (_products == null)
             {
                 productList.ItemsSource = _productRepository.ListProduct();
 
             }
-            
+
         }
 
         private void RefreshQuantity()
         {
-            foreach(Product p in productList.Items.OfType<Product>())
+            foreach (Product p in productList.Items.OfType<Product>())
             {
                 p.Quantity = 0;
             }
-            productList.Items.Refresh();    
+            productList.Items.Refresh();
 
         }
 
         private void SearchButton_Click(object sender, RoutedEventArgs e)
         {
-           
+
             var search = searchBox.Text;
             if (search.IsNullOrEmpty())
             {
@@ -201,7 +253,7 @@ namespace SalesWPFApp.AdminWPF
                 IEnumerable<Product> products = _productRepository.FindByName(search);
                 productList.ItemsSource = products;
             }
-               
+
         }
     }
 }
